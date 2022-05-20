@@ -13,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using PaymentGateway.Application.Commands.TransactionPayment;
 using PaymentGateway.Application.Services;
 using PaymentGateway.Domain;
@@ -38,6 +39,8 @@ namespace PaymentGateway.Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PaymentGateway.Api", Version = "v1" });
+                c.CustomOperationIds(
+                    d => (d.ActionDescriptor as ControllerActionDescriptor)?.ActionName);
             });
         }
 
@@ -54,7 +57,7 @@ namespace PaymentGateway.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
+                app.UseSwagger(o => o.SerializeAsV2 = true);
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PaymentGateway.Api v1"));
             }
 

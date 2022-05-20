@@ -1,0 +1,65 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PaymentGateway.Bank.Mock",
+    "version": "v1"
+  },
+  "paths": {
+    "/BankPayment/transactions": {
+      "post": {
+        "tags": [
+          "BankPayment"
+        ],
+        "operationId": "ProcessPayment",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "CardInfo.CardNumber",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "CardInfo.Cvv",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "CardInfo.HolderName",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "CardInfo.ExpiryMonth",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "CardInfo.ExpiryYear",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "formData",
+            "name": "Amount",
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "in": "formData",
+            "name": "CurrencyCode",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  }
+}
