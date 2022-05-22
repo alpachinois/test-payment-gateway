@@ -51,7 +51,3 @@ Finally, you can test the route /transactions by the following merchant example 
 7. Implement strategy pattern. This could be useful for handling others payment methods. This could be also useful for banking external services.
 8. Implement adapter pattern for banking service because each bank must probably has their own APIs.
 9. Implement the saga and circuit breaker patterns because this is tipically a distributed system with transactions.
-
-# What cloud technologies you’d use and why
-
-We can use cloud PaaS technology such as AWS PaaS, Azure PaaS or GCP PaaS. We could use templates to deploy resources quickly. Cloud technologies will also provides some very useful like automatic scales, geo-redondancy and advance storage features for data and logs (tracking, queries, reporting). However, I think that any solution must be cloud agnostic in order to by move easily to another provider. 
