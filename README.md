@@ -36,7 +36,7 @@ Finally, you can test the route /transactions by the following merchant example 
 
 # Assumptions made
 
-1. I do not implement card information domain invariants checking because instruction said card control is moved to external bank API.
+1. It simulates a simple payment gateway between a merchant and a bank.
 2. I use a bool for bank response IsSuccess instead of enum status. No enumeration status has been provided by instruction so I simplified the response. 
 3. Only card payment is handled.
 
