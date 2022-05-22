@@ -1,5 +1,4 @@
-﻿using System;
-using PaymentGateway.Domain.SeedWork;
+﻿using PaymentGateway.Domain.SeedWork;
 using PaymentGateway.Domain.ValueObjects;
 
 namespace PaymentGateway.Domain.Entities

@@ -1,8 +1,7 @@
 ﻿using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using PaymentGateway.Domain.Entities;
-using PaymentGateway.Domain.ValueObjects;
+using PaymentGateway.Application.Commands.TransactionPayment;
 using RestSharp;
 
 namespace PaymentGateway.Application.Services

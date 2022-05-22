@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using MediatR;
-using PaymentGateway.Domain.Entities;
-using PaymentGateway.Domain.ValueObjects;
 
 namespace PaymentGateway.Application.Commands.TransactionPayment
 {
@@ -18,4 +16,10 @@ namespace PaymentGateway.Application.Commands.TransactionPayment
         public Guid CardId { get; init; }
         public Shopper Shopper { get; set; }
     }
+
+    public record Merchant(string Name);
+    public record Shopper(string Name);
+    public record Amount(decimal Value, string Currency);
+    public record Bank(string Name, string ApiUrl);
+    public record CardInfo(string CardNumber, string Cvv, string HolderName, int ExpiryMonth, int ExpiryYear);
 }

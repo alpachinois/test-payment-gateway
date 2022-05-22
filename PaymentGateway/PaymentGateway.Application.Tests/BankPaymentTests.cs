@@ -3,11 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using PaymentGateway.Application.Commands.BankPayment;
-using PaymentGateway.Domain.Entities;
 using Xunit;
 using Moq;
+using PaymentGateway.Application.Commands.TransactionPayment;
 using PaymentGateway.Application.Services;
-using PaymentGateway.Domain.ValueObjects;
 
 namespace PaymentGateway.Application.Tests
 {

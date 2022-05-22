@@ -1,8 +1,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using PaymentGateway.Domain.Entities;
-using PaymentGateway.Domain.ValueObjects;
 using Xunit;
 using FluentAssertions;
 using MediatR;
@@ -10,7 +8,6 @@ using Moq;
 using PaymentGateway.Application.Commands.BankPayment;
 using PaymentGateway.Application.Commands.TransactionPayment;
 using PaymentGateway.Application.Services;
-using PaymentGateway.Domain;
 
 namespace PaymentGateway.Application.Tests
 {
@@ -31,15 +28,14 @@ namespace PaymentGateway.Application.Tests
             mediatorMoq.Setup(x => x.Send(It.IsAny<BankPaymentCommand>(), CancellationToken.None))
                 .ReturnsAsync(new BankResponse(Guid.NewGuid(), true, "OK"))
                 .Verifiable();
-            var test = System.Text.Json.JsonSerializer.Serialize(command);
-            var cardInfo = new CardInfo("1234-5678-9123-7897", "123", "test", 12, 25);
-            var amount = new Amount(30m, "EUR");
-            var bank = new Bank("fakeBank", "http://localhost/fake");
-            var merchant = new Merchant("test");
-            var shopper = new Shopper("test");
-            var transaction = new Transaction(amount, cardInfo, merchant, shopper, bank);
-            var repoMock = new Mock<ITransactionRepository>();
-            repoMock.Setup(x => x.CreateAsync(It.IsAny<Transaction>(), CancellationToken.None))
+            var cardInfo = new Domain.Entities.CardInfo("1234-5678-9123-7897", "123", "test", 12, 25);
+            var amount = new Domain.ValueObjects.Amount(30m, "EUR");
+            var bank = new Domain.Entities.Bank("fakeBank", "http://localhost/fake");
+            var merchant = new Domain.Entities.Merchant("test");
+            var shopper = new Domain.Entities.Shopper("test");
+            var transaction = new Domain.Entities.Transaction(amount, cardInfo, merchant, shopper, bank);
+            var repoMock = new Mock<Domain.ITransactionRepository>();
+            repoMock.Setup(x => x.CreateAsync(It.IsAny<Domain.Entities.Transaction>(), CancellationToken.None))
                 .ReturnsAsync(transaction)
                 .Verifiable();
 
@@ -51,7 +47,7 @@ namespace PaymentGateway.Application.Tests
             sut.IsSuccess.Should().BeTrue();
             sut.TransactionId.Should().NotBeEmpty();
             mediatorMoq.Verify(x => x.Send(It.IsAny<BankPaymentCommand>(), CancellationToken.None), Times.Once);
-            repoMock.Verify(x => x.CreateAsync(It.IsAny<Transaction>(), CancellationToken.None), Times.Once);
+            repoMock.Verify(x => x.CreateAsync(It.IsAny<Domain.Entities.Transaction>(), CancellationToken.None), Times.Once);
         }
 
         [Fact]
@@ -70,14 +66,14 @@ namespace PaymentGateway.Application.Tests
                 .ReturnsAsync(new BankResponse(Guid.NewGuid(), false, "KO"))
                 .Verifiable();
 
-            var cardInfo = new CardInfo("1234-5678-9123-7897", "123", "test", 12, 25);
-            var amount = new Amount(30m, "EUR");
-            var bank = new Bank("fakeBank", "http://localhost/fake");
-            var merchant = new Merchant("test");
-            var shopper = new Shopper("test");
-            var transaction = new Transaction(amount, cardInfo, merchant, shopper, bank);
-            var repoMock = new Mock<ITransactionRepository>();
-            repoMock.Setup(x => x.CreateAsync(It.IsAny<Transaction>(), CancellationToken.None))
+            var cardInfo = new Domain.Entities.CardInfo("1234-5678-9123-7897", "123", "test", 12, 25);
+            var amount = new Domain.ValueObjects.Amount(30m, "EUR");
+            var bank = new Domain.Entities.Bank("fakeBank", "http://localhost/fake");
+            var merchant = new Domain.Entities.Merchant("test");
+            var shopper = new Domain.Entities.Shopper("test");
+            var transaction = new Domain.Entities.Transaction(amount, cardInfo, merchant, shopper, bank);
+            var repoMock = new Mock<Domain.ITransactionRepository>();
+            repoMock.Setup(x => x.CreateAsync(It.IsAny<Domain.Entities.Transaction>(), CancellationToken.None))
                 .ReturnsAsync(transaction)
                 .Verifiable();
 
@@ -89,7 +85,7 @@ namespace PaymentGateway.Application.Tests
             sut.IsSuccess.Should().BeFalse();
             sut.TransactionId.Should().BeEmpty();
             mediatorMoq.Verify(x => x.Send(It.IsAny<BankPaymentCommand>(), CancellationToken.None), Times.Once);
-            repoMock.Verify(x => x.CreateAsync(It.IsAny<Transaction>(), CancellationToken.None), Times.Never);
+            repoMock.Verify(x => x.CreateAsync(It.IsAny<Domain.Entities.Transaction>(), CancellationToken.None), Times.Never);
         }
     }
 }

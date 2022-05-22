@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using PaymentGateway.Application.Commands.BankPayment;
 using PaymentGateway.Domain;
-using PaymentGateway.Domain.Entities;
+using PaymentGateway.Application;
 
 namespace PaymentGateway.Application.Commands.TransactionPayment
 {
@@ -27,7 +27,8 @@ namespace PaymentGateway.Application.Commands.TransactionPayment
 
             if (bankPaymentResponse.IsSuccess)
             {
-                var transaction = new Transaction(request.Amount, request.CardInfo, request.Merchant, request.Shopper, request.Bank);
+                
+                var transaction = request.ToDomain();
                 var newEntity = await _repository.CreateAsync(transaction, cancellationToken);
                 return new TransactionResponse(bankPaymentResponse.IsSuccess, newEntity.Id, string.Empty);
             }

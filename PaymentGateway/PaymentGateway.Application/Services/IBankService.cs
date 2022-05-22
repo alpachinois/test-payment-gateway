@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using PaymentGateway.Domain.Entities;
-using PaymentGateway.Domain.ValueObjects;
+using PaymentGateway.Application.Commands.TransactionPayment;
 
 namespace PaymentGateway.Application.Services
 {

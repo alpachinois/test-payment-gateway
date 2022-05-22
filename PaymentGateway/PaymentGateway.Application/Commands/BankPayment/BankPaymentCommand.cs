@@ -1,7 +1,6 @@
 ﻿using MediatR;
+using PaymentGateway.Application.Commands.TransactionPayment;
 using PaymentGateway.Application.Services;
-using PaymentGateway.Domain.Entities;
-using PaymentGateway.Domain.ValueObjects;
 
 namespace PaymentGateway.Application.Commands.BankPayment
 {
