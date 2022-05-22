@@ -24,7 +24,10 @@ namespace PaymentGateway.Bank.Mock.Controllers
                 return BadRequest(new BankResponse(Guid.Empty, false, "Amount musst be positive"));
 
             if(paymentInfo.CurrencyCode.Length != 3)
-                return BadRequest(new BankResponse(Guid.Empty, false, "Bad Cvv"));
+                return NotFound(new BankResponse(Guid.Empty, false, "Bad Cvv"));
+
+            if(string.IsNullOrEmpty(paymentInfo.CardInfo.CardNumber))
+                return NotFound(new BankResponse(Guid.Empty, false, "card number is empty"));
 
             return Ok(new BankResponse(Guid.NewGuid(), true, "OK"));
         }

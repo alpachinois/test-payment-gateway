@@ -21,3 +21,6 @@
 /PaymentGateway/PaymentGateway.Bank.RestClient/bin/Debug/netstandard2.0
 /PaymentGateway/PaymentGateway.Bank.RestClient/obj
 /PaymentGateway/PaymentGateway.RestClient/obj/Debug/netstandard2.0
+/PaymentGateway/PaymentGateway.Behaviors.Tests/bin/Debug/net5.0
+/PaymentGateway/PaymentGateway.Behaviors.Tests/obj
+/PaymentGateway/PaymentGateway.Behaviors.Tests/bin/Debug/net6.0
