@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using MediatR;
 using PaymentGateway.Application.Commands.BankPayment;
 using PaymentGateway.Domain;
-using PaymentGateway.Application;
 
 namespace PaymentGateway.Application.Commands.TransactionPayment
 {

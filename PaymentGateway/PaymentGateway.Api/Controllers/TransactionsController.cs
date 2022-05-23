@@ -11,6 +11,7 @@ using PaymentGateway.Application.Queries.Transaction;
 namespace PaymentGateway.Api.Controllers
 {
     [ApiController]
+    [ExceptionFilterAttribute]
     [Route("[controller]")]
     public class TransactionsController : ControllerBase
     {
